@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disaster Risk AI | Emergency Response Intelligence</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="landing">
+
+<div class="overlay">
+    <!-- System Badge -->
+    <div class="system-badge">
+        <i class="fas fa-shield-alt"></i> AI DECISION SUPPORT SYSTEM
+    </div>
+
+    <!-- Main Content Container -->
+    <div class="container landing-container">
+        <div class="landing-content">
+            
+            <!-- Title Section -->
+            <div class="title-section">
+                <h1 class="main-title">Disaster Risk Intelligence Platform</h1>
+                <p class="subtitle">AI-powered analysis for emergency preparedness and response coordination</p>
+            </div>
+
+            <!-- Upload Card -->
+            <div class="upload-card">
+                <div class="upload-header">
+                    <i class="fas fa-camera"></i>
+                    <span>Image Analysis Module</span>
+                </div>
+                
+                <form action="/predict" method="POST" enctype="multipart/form-data" id="uploadForm">
+                    <div class="upload-body">
+                        <div class="upload-zone">
+                            <input type="file" name="image" id="imageInput" class="file-input" accept="image/*" required>
+                            <label for="imageInput" class="file-label">
+                                <div class="upload-icon">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                </div>
+                                <div class="upload-text">
+                                    <span class="upload-primary">Select Disaster Imagery</span>
+                                    <span class="upload-secondary">Supported: Cyclone, Flood, Wildfire, Earthquake</span>
+                                </div>
+                            </label>
+                        </div>
+                        
+                        <div id="fileName" class="file-preview"></div>
+                    </div>
+
+                    <div class="upload-footer">
+                        <button type="submit" class="btn-analyze">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Analyze Risk Assessment</span>
+                        </button>
+                    </div>
+                </form>
+
+                <div class="trust-badge">
+                    <i class="fas fa-brain"></i>
+                    <span>Powered by CNN-LSTM hybrid architecture trained on verified disaster datasets</span>
+                </div>
+            </div>
+
+            <!-- Feature Grid -->
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <i class="fas fa-bolt"></i>
+                    <span>Real-time Analysis</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Predictive Forecasting</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-life-ring"></i>
+                    <span>Action Recommendations</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="landing-footer">
+        <div class="footer-text">
+            <i class="fas fa-info-circle"></i>
+            <span>Emergency Response Intelligence System</span>
+            <span class="separator">•</span>
+            <span class="disclaimer">Advisory system - verify with ground assessment</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    const imageInput = document.getElementById('imageInput');
+    const fileName = document.getElementById('fileName');
+    const uploadForm = document.getElementById('uploadForm');
+
+    imageInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            fileName.innerHTML = `<i class="fas fa-file-image"></i><span>${file.name}</span><span class="file-size">${(file.size / 1024).toFixed(1)} KB</span>`;
+            fileName.style.display = 'flex';
+        }
+    });
+
+    uploadForm.addEventListener('submit', function(e) {
+        const btn = this.querySelector('.btn-analyze');
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Processing Analysis...</span>';
+        btn.disabled = true;
+    });
+</script>
+
+</body>
+</html>
